@@ -1,3 +1,4 @@
+using ASC.Ultilities;
 using ASCWeb.Configuration;
 using ASCWeb.Models;
 using ASCWeb.Services;
@@ -9,19 +10,20 @@ namespace ASCWeb.Controllers
 {
 	public class HomeController : Controller
 	{
-		private IOptions<ApplicationSettings> _setting;
+		private IOptions<ApplicationSettings> _settings;
 
 		public HomeController(IOptions<ApplicationSettings> settings)
 		{
-			_setting = settings;
+			_settings = settings;
 		}
 
-		public IActionResult Index([FromServices] IEmailSender emailSender)
+		public IActionResult Index()
 		{
-			var emailService = this.HttpContext.RequestServices.GetService(typeof(IEmailSender)) as IEmailSender;
-			ViewBag.Title = _setting.Value.ApplicationTitle;
-			return View();
-		}
+			HttpContext.Session.SetSession("Test", _settings.Value);
+			var settings = HttpContext.Session.GetSession<ApplicationSettings>("Test");
+            ViewBag.Title = settings.ApplicationTitle;
+            return View();
+        }
 
 		public IActionResult Privacy()
 		{
