@@ -8,7 +8,7 @@ using System.Diagnostics;
 
 namespace ASCWeb.Controllers
 {
-	public class HomeController : Controller
+	public class HomeController : AnonymousController
 	{
 		private IOptions<ApplicationSettings> _settings;
 
@@ -25,20 +25,28 @@ namespace ASCWeb.Controllers
             return View();
         }
 
-		public IActionResult Privacy()
+		public IActionResult About()
 		{
+			ViewData["Message"] = "Your application description page.";
 			return View();
 		}
 
-		public IActionResult Dashboard()
-		{
-			return View();
-		}
+        public IActionResult Contact()
+        {
+            ViewData["Message"] = "Your contact page.";
+            return View();
+        }
 
-		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-		public IActionResult Error()
-		{
-			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-		}
-	}
+
+        public IActionResult Error()
+        {
+            return View();
+        }
+
+        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        //public IActionResult Error()
+        //{
+        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        //}
+    }
 }

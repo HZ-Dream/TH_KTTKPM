@@ -9,6 +9,7 @@ namespace ASCWeb.Data
         public virtual DbSet<MasterDataKey> MasterDataKeys { get; set; }
         public virtual DbSet<MasterDataValue> MasterDataValues { get; set; }
         public virtual DbSet<ServiceRequest> ServiceRequests { get; set; }
+        public virtual DbSet<Books> Books { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
