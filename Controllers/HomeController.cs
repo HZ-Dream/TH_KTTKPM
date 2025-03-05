@@ -21,7 +21,7 @@ namespace ASCWeb.Controllers
 		{
 			HttpContext.Session.SetSession("Test", _settings.Value);
 			var settings = HttpContext.Session.GetSession<ApplicationSettings>("Test");
-            ViewBag.Title = settings.ApplicationTitle;
+            ViewBag.Title = _settings.Value.ApplicationTitle;
             return View();
         }
 
