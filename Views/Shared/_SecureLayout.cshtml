@@ -75,11 +75,14 @@
             </a>
         </li>
         <li>
-            <a class="collapsible-header" href="#!">
+            <a class="collapsible-header" href="#!" id="ancrLogout">
                 <i class="material-icons">exit_to_app</i>
                 Logout
             </a>
         </li>
+        <form class="hide" method="post" id="logout_form" asp-area="Identity" asp-page="/Account/Logout">
+               <input type="submit" value="Logout" />
+        </form>
     </ul>
 </header>
 
@@ -136,5 +139,22 @@
 
 @section Scripts {
     @RenderSection("Scripts", required: false)
+<<<<<<< HEAD
+=======
+
+    <script type="text/javascript">
+        $(function () {
+           $('#ancrLogout').click(function () {
+              $('#logout_form').submit();
+           });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.collapsible').collapsible();
+        });
+    </script>
+>>>>>>> 9d3b72e (Fix Lab 4)
 }
 

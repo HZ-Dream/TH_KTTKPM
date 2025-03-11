@@ -96,6 +96,7 @@ namespace ASCWeb.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+<<<<<<< HEAD
             returnUrl ??= Url.Content("~/");
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
@@ -110,10 +111,47 @@ namespace ASCWeb.Areas.Identity.Pages.Account
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
                 }
+=======
+            // returnUrl = returnUrl ?? Url.Content("~/");
+
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByEmailAsync(Input.Email);
+                if (user == null)
+                {
+                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    return Page();
+                }
+
+                var list = await _userManager.GetClaimsAsync(user);
+                var isActive = Boolean.Parse(list.SingleOrDefault(p => p.Type == "IsActive").Value);
+                if (!isActive)
+                {
+                    ModelState.AddModelError(string.Empty, "Account has been locked.");
+                    return Page();
+                }
+
+                var result = await _signInManager.PasswordSignInAsync(
+                    user.UserName, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+
+                if (result.Succeeded)
+                {
+                    _logger.LogInformation(1, "User logged in.");
+                    if (!String.IsNullOrWhiteSpace(returnUrl))
+                        return RedirectToAction(returnUrl);
+                    else
+                        return RedirectToAction("Dashboard", "Dashboard");
+                }
+
+>>>>>>> 9d3b72e (Fix Lab 4)
                 if (result.RequiresTwoFactor)
                 {
                     return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
                 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9d3b72e (Fix Lab 4)
                 if (result.IsLockedOut)
                 {
                     _logger.LogWarning("User account locked out.");
@@ -129,5 +167,9 @@ namespace ASCWeb.Areas.Identity.Pages.Account
             // If we got this far, something failed, redisplay form
             return Page();
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9d3b72e (Fix Lab 4)
     }
 }

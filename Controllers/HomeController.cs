@@ -25,11 +25,19 @@ namespace ASCWeb.Controllers
             return View();
         }
 
+<<<<<<< HEAD
 		public IActionResult About()
 		{
 			ViewData["Message"] = "Your application description page.";
 			return View();
 		}
+=======
+        public IActionResult About()
+        {
+            ViewData["Message"] = "Your application description page.";
+            return View();
+        }
+>>>>>>> 9d3b72e (Fix Lab 4)
 
         public IActionResult Contact()
         {
@@ -38,6 +46,7 @@ namespace ASCWeb.Controllers
         }
 
 
+<<<<<<< HEAD
         public IActionResult Error()
         {
             return View();
@@ -48,5 +57,13 @@ namespace ASCWeb.Controllers
         //{
         //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         //}
+=======
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+>>>>>>> 9d3b72e (Fix Lab 4)
     }
 }
