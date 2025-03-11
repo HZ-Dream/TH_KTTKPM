@@ -12,10 +12,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ASCWeb.Areas.Identity.Pages.Account
 {
-<<<<<<< HEAD
-=======
     [AllowAnonymous]
->>>>>>> 9d3b72e (Fix Lab 4)
     public class LogoutModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
@@ -26,33 +23,15 @@ namespace ASCWeb.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
         }
-
-<<<<<<< HEAD
-=======
         public void OnGet()
         {
 
         }
-
->>>>>>> 9d3b72e (Fix Lab 4)
         public async Task<IActionResult> OnPost(string returnUrl = null)
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
-<<<<<<< HEAD
-            if (returnUrl != null)
-            {
-                return LocalRedirect(returnUrl);
-            }
-            else
-            {
-                // This needs to be a redirect so that the browser performs a new
-                // request and the identity for the user gets updated.
-                return RedirectToPage();
-            }
-=======
             return LocalRedirect("/Home/Index");
->>>>>>> 9d3b72e (Fix Lab 4)
         }
     }
 }
