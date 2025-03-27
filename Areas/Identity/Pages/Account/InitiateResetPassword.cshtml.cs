@@ -3,6 +3,8 @@ using ASCWeb.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.WebUtilities;
+using System.Text;
 
 namespace ASCWeb.Areas.Identity.Pages.Account
 {
@@ -29,14 +31,11 @@ namespace ASCWeb.Areas.Identity.Pages.Account
 
             // Generate User code
             var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var encodedCode = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
             var callbackUrl = Url.Page(
                 "/Account/ResetPassword",
                 pageHandler: null,
-                values: new
-                {
-                    userId = user.Id,
-                    code = code
-                },
+                values: new { userId = user.Id, code = encodedCode, email = userEmail },
                 protocol: Request.Scheme);
 
             // Send Email
