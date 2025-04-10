@@ -16,6 +16,15 @@ namespace ASCWeb.Services
                 options.UseSqlServer(connectionString));
             services.AddOptions();
             services.Configure<ApplicationSettings>(config.GetSection("AppSettings"));
+
+            // Using a Gmail
+            services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+                    IConfigurationSection googleAuthSection = config.GetSection("Authentication:Google");
+                    options.ClientId = config["Google:Identity:ClientId"];
+                    options.ClientSecret = config["Google:Identity:ClientSecret"];
+                });
             return services;
         }
 
@@ -36,7 +45,13 @@ namespace ASCWeb.Services
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             // Add Cache, Session
-            services.AddSession();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddDistributedMemoryCache();

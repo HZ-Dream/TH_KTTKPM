@@ -55,10 +55,34 @@ p {
     color: #ff4081;
 }
 
-<<<<<<< HEAD
+.margin-top-20px {
+    margin-top: 20px;
+}
 
-=======
->>>>>>> 9d3b72e (Fix Lab 4)
+.padding-bottom-15px {
+    padding-bottom: 15px !important;
+}
+
+.cursor-hand {
+    cursor: pointer;
+}
+
+.padding-left-20px {
+    padding-left: 20px;
+}
+
+.padding-right-20px {
+    padding-right: 20px;
+}
+
+.margin-top-50px {
+    margin-top: 50px;
+}
+
+.margin-bottom-50px {
+    margin-bottom: 50px;
+}
+
 @media (max-width: 600px) {
     .nav-wrapper .brand-logo img {
         height: 56px;

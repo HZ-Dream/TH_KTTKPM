@@ -8,6 +8,15 @@
     var currentUser = UserHttpContext.HttpContext.User.GetCurrentUserDetails();
 }
 
+<style>
+    .dataTables_wrapper .dataTables_filter input {
+        width: 200px;
+        height: 25px;
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+</style>
+
 <!-- Header -->
 <header class="secureLayout">
     <nav class="top-nav blue-grey lighten-1">
@@ -107,5 +116,5 @@
         });
     </script>
 }
-@RenderSection("Scripts", required: false)
+
 
